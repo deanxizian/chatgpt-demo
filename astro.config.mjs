@@ -10,7 +10,12 @@ import disableBlocks from './plugins/disableBlocks'
 
 const envAdapter = () => {
   switch (process.env.OUTPUT) {
-    case 'vercel': return vercel()
+    case 'vercel':
+      return vercel({
+        webAnalytics: {
+          enabled: true
+        }
+      })
     case 'netlify': return netlify()
     default: return node({ mode: 'standalone' })
   }
@@ -25,7 +30,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'inline',
       manifest: {
-        name: 'ChatGPT-API Demo',
+        name: 'ChatGPT Demo',
         short_name: 'ChatGPT Demo',
         description: 'A demo repo based on OpenAI API',
         theme_color: '#212129',
